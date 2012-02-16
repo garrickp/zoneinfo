@@ -1,0 +1,44 @@
+An implementation of the IANA zoneinfo data matching the python datetime.tzinfo
+interface. Generated from the data located here:
+
+http://www.iana.org/time-zones
+
+The code which created this file can be found here:
+
+https://github.com/garrickp/tzinfo_py
+
+KNOWN ISSUES:
+A few rules are inconsistantly provided in UTC times, which means that they may
+be inaccurate for a few hours around DST boundaries.
+
+Creating datetime objects from times that should't exist because of the
+boundary of DST rules(for example, 2:30 am on Nov 6, 2011) will not throw any
+errors.
+
+datetime.time behavior:
+The rules for the current date/time will be applied to datetime.time objects
+when calculating the UTC offset.
+
+Example Usage:
+>>>
+>>> import zoneinfo
+>>> from datetime import datetime, time
+>>> datetime.now(zoneinfo.timezones['US/Mountain']).time().isoformat()
+'20:37:03.776597'
+>>> datetime.now(zoneinfo.timezones['US/Mountain']).isoformat()
+'2012-02-15T20:37:13.730864-07:00'
+>>> time(20, 37, tzinfo=zoneinfo.timezones['US/Mountain']).isoformat()
+'20:37:00-07:00'
+>>> 
+>>> mst = zoneinfo.timezones['US/Mountain']
+>>> pst = zoneinfo.timezones['US/Pacific']
+>>> dt = datetime(2011, 7, 4, 0, 0, tzinfo=mst)
+>>> dt
+datetime.datetime(2011, 7, 4, 0, 0, tzinfo=<zoneinfo.America_Denver object at 0x76b17d0>)
+>>> dt.utcoffset()
+datetime.timedelta(-1, 57600)
+>>> dtp = dt.astimezone(pst)
+>>> dtp
+datetime.datetime(2011, 7, 3, 23, 0, tzinfo=<zoneinfo.America_Los_Angeles object at 0x76b2ad0>)
+
+
