@@ -1,5 +1,7 @@
 """
-generated northamerica zoneinfo file
+generated zoneinfo file
+
+Generated from: https://github.com/garrickp/tzinfo_py
 
 Copyright (c) 2012 Garrick Peterson
 
