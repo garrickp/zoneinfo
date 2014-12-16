@@ -1,3 +1,8 @@
+## Notice ##
+This project is, in my eyes, abandoned. I did it for fun several years back,
+but it does not stack up against other timezone libraries, and I have abandoned
+it. Use at your own risk!
+
 An implementation of the IANA zoneinfo data matching the python datetime.tzinfo
 interface. Generated from the data located here:
 
